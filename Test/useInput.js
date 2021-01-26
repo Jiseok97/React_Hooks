@@ -2,12 +2,15 @@ import React, { useState } from "react";
 import "./styles.css";
 
 const useInput = (initailValue, validator) => {
+  // validator 은 검증 기능
   const [value, setValue] = useState(initailValue);
   const onChange = (event) => {
     const {
       target: { value },
     } = event;
     let willUpdate = true;
+    // validator 의 type 이 function 인지 체크
+    // 아래 maxLength의 조건이 성립이 되면, Update 하게 됨
     if (typeof validator === "function") {
       willUpdate = validator(value);
     }
@@ -20,6 +23,7 @@ const useInput = (initailValue, validator) => {
 
 const App = () => {
   const maxLength = (value) => !value.includes("@");
+  // const maxLength = (value) => value.length <= 10;
   const name = useInput("Mr.", maxLength);
   return (
     <div className="App">
