@@ -18,8 +18,8 @@ const useTabs = (initialTab, allTabs) => {
   }
   const [currentIndex, setCurrentIndex] = useState(initialTab);
   return {
-    currentItem: allTabs[currentIndex],
-    chageItem: setCurrentIndex,
+    currentItem: allTabs[currentIndex], // 현재 index의 모든 원소를 가져옴 (배열 형태로)
+    chageItem: setCurrentIndex, // setCuurentIndex를 통해 content의 배열을 바꿈
   };
 };
 
@@ -28,9 +28,14 @@ const App = () => {
   return (
     <div className="App">
       <h1>Hello</h1>
+      {/* content의 배열을 가져오고 그 안의 원소들을 가져옴(원소: tab, content) */}
       {content.map((section, index) => (
+        // 클릭할 때 마다 changeItem을 통하여 1번째 index와 2번째 index를 불러옴
+        // section은 배열의 원소(tab, content)를 가져옴 && 첫번째꺼, 두번째꺼 순서대로 가져옴(map의 기능)
+        // index는 배열의 갯수를 의미, 2개
         <button onClick={() => chageItem(index)}>{section.tab}</button>
       ))}
+      {/* 현재 선택된 배열의 content를 가져옴 */}
       <div>{currentItem.content}</div>
     </div>
   );
