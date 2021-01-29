@@ -1,14 +1,30 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./styles.css";
 
+const useClick = (onClick) => {
+  if (typeof onClick !== "function") {
+    return;
+  }
+  const element = useRef();
+  useEffect(() => {
+    if (element.current) {
+      element.current.addEventListener("click", onClick);
+    }
+    return () => {
+      if (element.current) {
+        element.current.removeEventListener("click", onClick);
+      }
+    };
+  }, []);
+  return element;
+};
+
 const App = () => {
-  const jsP = useRef();
-  // focus()를 통해 input 박스 안에 블럭이 5초 후 활성화 됨
-  setTimeout(() => jsP.current.focus(), 5000);
+  const sayHello = () => console.log("say hello");
+  const title = useClick(sayHello);
   return (
     <div className="App">
-      <h1>Hi</h1>
-      <input ref={jsP} placeholder="Hi" />
+      <h1 ref={title}>Hi</h1>
     </div>
   );
 };
