@@ -9,6 +9,9 @@ const usePreventLeave = () => {
     event.preventDefault();
     event.retrunValue = "";
   };
+  // API에 뭔가를 보냈고, 사람들이 닫지 않기를 바란다면, 그걸 보호 활성화
+  // beforeunload는 window가 닫히기 전에 function이 실행되는 걸 허락함
+  // 그 function이 위에 있는 event.preventDefault()
   const enablePrevent = () => {
     window.addEventListener("beforeunload", listener);
     console.log("enablePrevent");
