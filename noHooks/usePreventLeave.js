@@ -7,6 +7,7 @@ import "./styles.css";
 const usePreventLeave = () => {
   const listener = (event) => {
     event.preventDefault();
+    // event.returnValue 를 꼭 넣어줘야 작동함
     event.retrunValue = "";
   };
   // API에 뭔가를 보냈고, 사람들이 닫지 않기를 바란다면, 그걸 보호 활성화
